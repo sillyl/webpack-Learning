@@ -9,6 +9,8 @@ module.exports = {
     //文件名 入口文件(js文件)打包输出文件名
     // filename: "main.js",
     filename: "static/js/main.js",
+    //在打包前 将path 目录整个清空，重新打包
+    clean: true //代替webpack4 引入的包： clean-webpack-plugin， 自动清空上次打包结果，每次自动更新打包内容
   },
 
   //加载器
