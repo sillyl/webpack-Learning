@@ -236,7 +236,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css
   \*************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"static/images/8aa5133cc1683b4ab30d.png\";\n\n//# sourceURL=webpack://webpack-learning/./src/img/404.png?");
+eval("module.exports = __webpack_require__.p + \"static/images/8aa5133cc1.png\";\n\n//# sourceURL=webpack://webpack-learning/./src/img/404.png?");
 
 /***/ }),
 
@@ -256,7 +256,7 @@ eval("module.exports = \"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCE
   \***************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"static/images/d590dc9574dbba4189f8.jpg\";\n\n//# sourceURL=webpack://webpack-learning/./src/img/login.jpg?");
+eval("module.exports = __webpack_require__.p + \"static/images/d590dc9574.jpg\";\n\n//# sourceURL=webpack://webpack-learning/./src/img/login.jpg?");
 
 /***/ }),
 

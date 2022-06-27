@@ -57,7 +57,8 @@ module.exports = {
           }
         },
         generator: { //输出图片文件路径 名称； ext文件扩展名（png/jpg等，query携带其他参数比如写background-url（‘xxx?query’）
-          filename: 'static/images/[hash][ext][query]'
+          //[hash:10] hash值去前10位（防止图片文件名过长）
+          filename: 'static/images/[hash:10][ext][query]'
         }
       },
     ]
