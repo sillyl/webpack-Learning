@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>nodata_simple</title>
+    <g id="nodata_simple" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组备份" transform="translate(6.000000, 6.000000)">
+            <path d="M67.6571695,47.3691973 C68.1131491,47.6363962 68.1140797,48.0692063 67.6611244,48.3366413 L34.6824012,67.7991574 C34.229446,68.0663563 33.4933647,68.0673013 33.0373851,67.7998662 L0.343649103,48.6312452 C-0.112330478,48.3640463 -0.114889547,47.9302912 0.33806568,47.6628562 L33.3170215,28.2005763 C33.7699768,27.9331412 34.5072213,27.9331412 34.9632009,28.2005763 L67.6571695,47.3691973 Z" id="Fill-1" fill="#F5F5FA"></path>
+            <path d="M63.6240127,16.9754915 C64.1231139,17.2657865 64.1256603,17.7345667 63.6296148,18.0248616 L34.9962322,34.7824711 C34.5004414,35.0725096 33.6967866,35.0725096 33.1976855,34.7824711 L4.37688523,18.0251181 C3.87778407,17.7348231 3.87345513,17.2650171 4.36950057,16.9749786 L33.0028832,0.21711268 C33.498674,-0.0729258285 34.3038566,-0.0721564955 34.8032124,0.218138457 L63.6240127,16.9754915 Z" id="Fill-1复制" stroke="#D7D8E0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2,3"></path>
+            <path d="M63.6240127,40.9754915 C64.1231139,41.2657865 64.1256603,41.7345667 63.6296148,42.0248616 L34.9962322,58.7824711 C34.5004414,59.0725096 33.6967866,59.0725096 33.1976855,58.7824711 L4.37688523,42.0251181 C3.87778407,41.7348231 3.87345513,41.2650171 4.36950057,40.9749786 L33.0028832,24.2171127 C33.498674,23.9270742 34.3038566,23.9278435 34.8032124,24.2181385 L63.6240127,40.9754915 Z" id="Fill-1复制-2" stroke="#D7D8E0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2,3"></path>
+            <line x1="34" y1="0" x2="34" y2="58" id="路径-8复制-3" stroke="#D7D8E0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2,3"></line>
+            <line x1="4" y1="17.5" x2="4" y2="41.5" id="路径-8复制-4" stroke="#D7D8E0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2,3"></line>
+            <line x1="64" y1="18" x2="64" y2="40.5" id="路径-8复制-5" stroke="#D7D8E0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2,3"></line>
+        </g>
+    </g>
+</svg>
