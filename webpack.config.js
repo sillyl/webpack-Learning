@@ -5,10 +5,10 @@ module.exports = {
   output: {
     //文件输出路径
     //_dirname node.js变量,代表当前文件的文件目录
-    path: path.resolve(__dirname, "dist"), //绝对路径
-    //文件名 入口文件打包输出文件名
+    path: path.resolve(__dirname, "dist"), //绝对路径 path所有文件打包输出目录
+    //文件名 入口文件(js文件)打包输出文件名
     // filename: "main.js",
-    filename: "main.js",
+    filename: "static/js/main.js",
   },
 
   //加载器
@@ -55,6 +55,9 @@ module.exports = {
           dataUrlCondition: {
             maxSize: 10 * 1024 // 小于10kb的图片会被base64处理,优点：减少请求数量，缺点：体积会变大一些
           }
+        },
+        generator: { //输出图片文件路径 名称； ext文件扩展名（png/jpg等，query携带其他参数比如写background-url（‘xxx?query’）
+          filename: 'static/images/[hash][ext][query]'
         }
       },
     ]
