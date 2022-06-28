@@ -64,7 +64,7 @@ module.exports = {
         }
       },
       { //woff|woff2|ttf|eot|svg
-        test: /\.(ttf|woff2?)$/,
+        test: /\.(ttf|woff2?｜mp3|mp4|avi)$/,
         type: "asset/resource",//相当于webpack4的file-loader 只会对原文件进行输出，不会对原文件转base64
         generator: { //输出图标（icon）文件路径
           //[hash:10] hash值去前10位（防止图片文件名过长）
