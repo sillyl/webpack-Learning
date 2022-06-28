@@ -1,5 +1,6 @@
 const path = require("path"); //node.js模块,用来处理路径问题‘
 const ESLintPlugin = require('eslint-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   //入口
@@ -91,7 +92,13 @@ module.exports = {
     // plugin配置
     new ESLintPlugin({
       context: path.resolve(__dirname, 'src') // 指定检查文件的根目录
-    })
+    }),
+    // new HtmlWebpackPlugin(), 单独这么写到会在dist下面生成一个index.html的文件，但是其他引入不会展示出来
+    new HtmlWebpackPlugin({
+      // template作用： 以public/index.html为模版，创建新的index.html文件
+      // 新的文件特点： 1.结构和原来一致； 2.会自动引入打包资源 <script defer src="static/js/main.js"></script></head>
+      template: path.resolve(__dirname, "public/index.html")
+    }),
   ],
 
   //模式
