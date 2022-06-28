@@ -73,6 +73,16 @@ module.exports = {
           filename: 'static/media/[hash:10][ext][query]'
         }
       },
+      {
+        test: /\.(js|mjs|jsx|ts|tsx)$/,
+        exclude: /(node_modules|bower_components)/, //排除文件
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'] //智能预设，能够编译ES6语法
+          }
+        }
+      }
     ]
   },
 
