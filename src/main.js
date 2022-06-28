@@ -9,4 +9,4 @@ import './sass/index1.scss';
 import './stylus/index.styl';
 
 console.log(count(2, 1));
-console.log(sum(1, 2, 3, 4));
+console.log(sum(1, 2, 3, 4, 5, 6));

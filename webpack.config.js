@@ -101,6 +101,13 @@ module.exports = {
     }),
   ],
 
+  // 开发服务器 不会输出任何资源，在内存中编译打包（直白的讲不会修改dist，也就是执行npx webpack生成的dist文件）
+  devServer: { // 运行指令 npx webpack serve
+    host: "localhost", // 启动服务器域名
+    port: "3000", // 启动服务器端口号
+    open: true, // 是否自动打开浏览器
+  },
+
   //模式
   mode: "development"
 
