@@ -75,11 +75,11 @@ module.exports = {
       },
       {
         test: /\.(js|mjs|jsx|ts|tsx)$/,
-        exclude: /(node_modules|bower_components)/, //排除文件
+        exclude: /(node_modules|bower_components)/, // 排除文件
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'] //智能预设，能够编译ES6语法
+          options: { // options里的内容可以在外层新建个文件 babel.config.js文件 使用module.exports={presets: ['@babel/preset-env']}
+            presets: ['@babel/preset-env'] // 智能预设，能够编译ES6语法
           }
         }
       }
