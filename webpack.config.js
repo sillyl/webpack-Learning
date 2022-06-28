@@ -12,8 +12,9 @@ module.exports = {
     //文件名 入口文件(js文件)打包输出文件名
     // filename: "main.js",
     filename: "static/js/main.js",
-    //在打包前 将path 目录整个清空，重新打包
-    clean: true //代替webpack4 引入的包： clean-webpack-plugin， 自动清空上次打包结果，每次自动更新打包内容
+    // 在打包前 将path 目录整个清空，重新打包；
+    // 使用开发服务clean配置会失效
+    clean: true //代替webpack4 引入的包：clean-webpack-plugin， 自动清空上次打包结果，每次自动更新打包内容
   },
 
   //加载器
@@ -66,7 +67,7 @@ module.exports = {
           filename: 'static/images/[hash:10][ext][query]'
         }
       },
-      { //woff|woff2|ttf|eot|svg
+      { //woff|woff2|ttf|eot|svg 其他文件配置
         test: /\.(ttf|woff2?｜mp3|mp4|avi)$/,
         type: "asset/resource",//相当于webpack4的file-loader 只会对原文件进行输出，不会对原文件转base64
         generator: { //输出图标（icon）文件路径
