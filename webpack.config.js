@@ -52,7 +52,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|webp|svg)$/,
-        type: "asset",//相当于webpack4的url-loader
+        type: "asset",//相当于webpack4的url-loader, 会将原文件转base64输出
         parser: {
           dataUrlCondition: {
             maxSize: 10 * 1024 // 小于10kb的图片会被base64处理,优点：减少请求数量，缺点：体积会变大一些
@@ -61,6 +61,14 @@ module.exports = {
         generator: { //输出图片文件路径 名称； ext文件扩展名（png/jpg等，query携带其他参数比如写background-url（‘xxx?query’）
           //[hash:10] hash值去前10位（防止图片文件名过长）
           filename: 'static/images/[hash:10][ext][query]'
+        }
+      },
+      { //woff|woff2|ttf|eot|svg
+        test: /\.(ttf|woff2?)$/,
+        type: "asset/resource",//相当于webpack4的file-loader 只会对原文件进行输出，不会对原文件转base64
+        generator: { //输出图标（icon）文件路径
+          //[hash:10] hash值去前10位（防止图片文件名过长）
+          filename: 'static/media/[hash:10][ext][query]'
         }
       },
     ]
