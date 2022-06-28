@@ -1,0 +1,3 @@
+# 忽略那些文件校验检查，如eslintrc.js中no-var不允许使用var，忽略dist文件的eslint校验
+
+dist
