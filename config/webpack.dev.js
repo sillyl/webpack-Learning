@@ -1,6 +1,7 @@
 const path = require("path"); //node.js模块,用来处理路径问题‘
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   //入口
@@ -25,16 +26,17 @@ module.exports = {
       {
         test: /\.css$/, //test检测xx文件，检测.css结尾的文件
         use: [
-          "style-loader",//将js 中 css 通过创建style标签添加html文件中生效
+          MiniCssExtractPlugin.loader, // 提取css成单独文件
+          //style-loader 将js 中 css 通过创建style标签添加html文件中生效(动态创建style标签)
           "css-loader" //将css资源编译common.js 的模块到js中
         ], //use执行顺序是从右向左（从下向上）
       },
       {
         test: /\.less$/,
-        // loader:'style-loader', //loader使用一个，use可以加载多个loader
+        // loader: MiniCssExtractPlugin.loader, //loader使用一个，use可以加载多个loader
         use: [
           // compiles Less to CSS
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'less-loader',//将less资源编译css文件
         ],
@@ -42,7 +44,7 @@ module.exports = {
       {
         test: /\.s[ac]ss$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader',//将sass资源编译css文件
         ],
@@ -50,7 +52,7 @@ module.exports = {
       {
         test: /\.styl$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'stylus-loader',//将stylus资源编译css文件
         ],
@@ -101,6 +103,7 @@ module.exports = {
       // 新的文件特点： 1.结构和原来一致； 2.会自动引入打包资源 <script defer src="static/js/main.js"></script></head>
       template: path.resolve(__dirname, "../public/index.html")
     }),
+    new MiniCssExtractPlugin()
   ],
 
   // 开发服务器 不会输出任何资源，在内存中编译打包（直白的讲不会修改dist，也就是执行npx webpack生成的dist文件）
