@@ -8,7 +8,7 @@ module.exports = {
   output: {
     //文件输出路径
     //_dirname node.js变量,代表当前文件的文件目录
-    path: path.resolve(__dirname, "dist"), //绝对路径 path所有文件打包输出目录
+    path: path.resolve(__dirname, "../dist"), //绝对路径 path所有文件打包输出目录
     //文件名 入口文件(js文件)打包输出文件名
     // filename: "main.js",
     filename: "static/js/main.js",
@@ -92,24 +92,24 @@ module.exports = {
   plugins: [
     // plugin配置
     new ESLintPlugin({
-      context: path.resolve(__dirname, 'src') // 指定检查文件的根目录
+      context: path.resolve(__dirname, '../src') // 指定检查文件的根目录
     }),
     // new HtmlWebpackPlugin(), 单独这么写到会在dist下面生成一个index.html的文件，但是其他引入不会展示出来
     new HtmlWebpackPlugin({
       // template作用： 以public/index.html为模版，创建新的index.html文件
       // 新的文件特点： 1.结构和原来一致； 2.会自动引入打包资源 <script defer src="static/js/main.js"></script></head>
-      template: path.resolve(__dirname, "public/index.html")
+      template: path.resolve(__dirname, "../public/index.html")
     }),
   ],
 
-  // 开发服务器 不会输出任何资源，在内存中编译打包（直白的讲不会修改dist，也就是执行npx webpack生成的dist文件）
-  devServer: { // 运行指令 npx webpack serve
-    host: "localhost", // 启动服务器域名
-    port: "3000", // 启动服务器端口号
-    open: true, // 是否自动打开浏览器
-  },
+  //生产环境不需要devServer
+  // // 开发服务器 不会输出任何资源，在内存中编译打包（直白的讲不会修改dist，也就是执行npx webpack生成的dist文件）
+  // devServer: { // 运行指令 npx webpack serve
+  //   host: "localhost", // 启动服务器域名
+  //   port: "3000", // 启动服务器端口号
+  //   open: true, // 是否自动打开浏览器
+  // },
 
   //模式
-  mode: "development"
-
+  mode: "production"
 }
