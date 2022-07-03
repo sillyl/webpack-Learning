@@ -123,10 +123,13 @@ module.exports = {
           {
             test: /\.(js|mjs|jsx|ts|tsx)$/,
             exclude: /(node_modules|bower_components)/, // 排除文件
+            // include: path.resolve(__dirname, "./src"), // exclude和include只用一个即可，尝试两者并用，不冲突的情况 未报错
             use: {
               loader: 'babel-loader',
               options: { // options里的内容可以在外层新建个文件 babel.config.js文件 使用module.exports={presets: ['@babel/preset-env']}
-                presets: ['@babel/preset-env'] // 智能预设，能够编译ES6语法
+                presets: ['@babel/preset-env'], // 智能预设，能够编译ES6语法
+                cacheDirectory: true, // 开启cache缓存
+                cacheCompression: false, // 关闭缓存文件压缩
               }
             }
           }
@@ -139,7 +142,8 @@ module.exports = {
   plugins: [
     // plugin配置
     new ESLintPlugin({
-      context: path.resolve(__dirname, '../src') // 指定检查文件的根目录 (因为讲webpack配置移动到config文件下 绝对位置需要回退一层路径，相对路径不需要改变)
+      context: path.resolve(__dirname, '../src'), // 指定检查文件的根目录 (因为讲webpack配置移动到config文件下 绝对位置需要回退一层路径，相对路径不需要改变)
+      exclude: "node_modules", // 默认值
     }),
     // new HtmlWebpackPlugin(), 单独这么写到会在dist下面生成一个index.html的文件，但是其他引入不会展示出来
     new HtmlWebpackPlugin({

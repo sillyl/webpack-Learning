@@ -89,7 +89,9 @@ module.exports = {
             use: {
               loader: 'babel-loader',
               options: { // options里的内容可以在外层新建个文件 babel.config.js文件 使用module.exports={presets: ['@babel/preset-env']}
-                presets: ['@babel/preset-env'] // 智能预设，能够编译ES6语法
+                presets: ['@babel/preset-env'], // 智能预设，能够编译ES6语法
+                cacheDirectory: true, // 开启cache缓存
+                cacheCompression: false, // 关闭缓存文件压缩
               }
             }
           }
@@ -102,7 +104,10 @@ module.exports = {
   plugins: [
     // plugin配置
     new ESLintPlugin({
-      context: path.resolve(__dirname, '../src') // 指定检查文件的根目录
+      context: path.resolve(__dirname, '../src'), // 指定检查文件的根目录
+      // exclude: "node_modules", // 默认值
+      cache: true, // 开启缓存
+      cacheLocation: path.resolve(__dirname, "../node_modules/.cache/eslintCache"), // 缓存目录
     }),
     // new HtmlWebpackPlugin(), 单独这么写到会在dist下面生成一个index.html的文件，但是其他引入不会展示出来
     new HtmlWebpackPlugin({
