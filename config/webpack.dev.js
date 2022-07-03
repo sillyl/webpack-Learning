@@ -2,6 +2,13 @@ const path = require("path"); //node.js模块,用来处理路径问题‘
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+//就像 optimize-css-assets-webpack-plugin 一样，但在 source maps 和 assets 中使用查询字符串会更加准确，支持缓存和并发模式下运行。
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const terserWebpackPlugin = require("terser-webpack-plugin"); // 内置插件
+// nodejs核心模块，直接使用
+const os = require("os");
+// cpu核数
+const threads = os.cpus().length;
 
 module.exports = {
   //入口
@@ -124,14 +131,22 @@ module.exports = {
             test: /\.(js|mjs|jsx|ts|tsx)$/,
             exclude: /(node_modules|bower_components)/, // 排除文件
             // include: path.resolve(__dirname, "./src"), // exclude和include只用一个即可，尝试两者并用，不冲突的情况 未报错
-            use: {
-              loader: 'babel-loader',
-              options: { // options里的内容可以在外层新建个文件 babel.config.js文件 使用module.exports={presets: ['@babel/preset-env']}
-                presets: ['@babel/preset-env'], // 智能预设，能够编译ES6语法
-                cacheDirectory: true, // 开启cache缓存
-                cacheCompression: false, // 关闭缓存文件压缩
+            use: [
+              {
+                loader: "thread-loader", // 开启多进程
+                options: {
+                  worker: threads // 进程数量
+                }
+              },
+              {
+                loader: 'babel-loader',
+                options: { // options里的内容可以在外层新建个文件 babel.config.js文件 使用module.exports={presets: ['@babel/preset-env']}
+                  presets: ['@babel/preset-env'], // 智能预设，能够编译ES6语法
+                  cacheDirectory: true, // 开启cache缓存
+                  cacheCompression: false, // 关闭缓存文件压缩
+                }
               }
-            }
+            ]
           }
         ]
       }
@@ -144,6 +159,7 @@ module.exports = {
     new ESLintPlugin({
       context: path.resolve(__dirname, '../src'), // 指定检查文件的根目录 (因为讲webpack配置移动到config文件下 绝对位置需要回退一层路径，相对路径不需要改变)
       exclude: "node_modules", // 默认值
+      threads, //开启多进程和进程数量
     }),
     // new HtmlWebpackPlugin(), 单独这么写到会在dist下面生成一个index.html的文件，但是其他引入不会展示出来
     new HtmlWebpackPlugin({
@@ -151,8 +167,30 @@ module.exports = {
       // 新的文件特点： 1.结构和原来一致； 2.会自动引入打包资源 <script defer src="static/js/main.js"></script></head>
       template: path.resolve(__dirname, "../public/index.html")
     }),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
+    // new CssMinimizerPlugin(),
+    // // 当生产模式会默认开启TerserPlugin，但是我们需要进行其他配置，就要重新写了
+    // new terserWebpackPlugin({
+    //   parallel: threads  // 开启多进程
+    // })
   ],
+
+  // 压缩操作 和上面的 1，2功能相同
+  //1.new CssMinimizerPlugin(),
+  //2.new terserWebpackPlugin({
+  //   parallel: threads  // 开启多进程
+  // })
+  optimization: {
+    minimize: true,
+    minimizer: [
+      // css压缩也可以写到optimization.minimizer里面，效果一样的
+      new CssMinimizerPlugin(),
+      // 当生产模式会默认开启TerserPlugin，但是我们需要进行其他配置，就要重新写了
+      new terserWebpackPlugin({
+        parallel: threads // 开启多进程
+      })
+    ],
+  },
 
   // 开发服务器 不会输出任何资源，在内存中编译打包（直白的讲不会修改dist，也就是执行npx webpack生成的dist文件）
   devServer: { // 运行指令 npx webpack serve
