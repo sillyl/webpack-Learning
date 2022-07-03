@@ -40,5 +40,8 @@
     "last 2 version",
     "> 1%",
     "not dead"
-  ]
+  ],
+  "dependencies": {
+    "css-minimizer-webpack-plugin": "^4.0.0"
+  }
 }

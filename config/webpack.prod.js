@@ -2,6 +2,7 @@ const path = require("path"); //node.js模块,用来处理路径问题‘
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin"); //就像 optimize-css-assets-webpack-plugin 一样，但在 source maps 和 assets 中使用查询字符串会更加准确，支持缓存和并发模式下运行。
 
 // 获取处理样式的Loaders
 const getStyleLoaders = (preProcessor) => {
@@ -107,7 +108,8 @@ module.exports = {
     }),
     new MiniCssExtractPlugin(
       { filename: "static/css/main.css" }
-    ) // 没有指定目录会生成在dist文件下 dist/main.csss
+    ),// 没有指定目录会生成在dist文件下 dist/main.csss
+    new CssMinimizerPlugin()
   ],
 
   //生产环境不需要devServer
