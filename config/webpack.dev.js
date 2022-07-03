@@ -151,6 +151,8 @@ module.exports = {
     host: "localhost", // 启动服务器域名
     port: "3000", // 启动服务器端口号
     open: true, // 是否自动打开浏览器
+    //热替换只能用于开发模式
+    hot: true //关闭HMR(默认值true) HotModuleReplacement（HMR/热模块替换）：在程序运行中，替换、添加或删除模块，而无需重新加载整个页面。
   },
 
   //模式
