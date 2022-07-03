@@ -3,6 +3,26 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+// 获取处理样式的Loaders
+const getStyleLoaders = (preProcessor) => {
+  return [
+    MiniCssExtractPlugin.loader, //将css提取单独文件
+    // style-loader将js 中 css 通过创建style标签添加html文件中生效
+    "css-loader", //将css资源编译common.js 的模块到js中
+    {
+      loader: "postcss-loader",
+      options: {
+        postcssOptions: {
+          plugins: [
+            "postcss-preset-env", // 能解决大多数样式兼容性问题
+          ],
+        },
+      },
+    },
+    preProcessor,
+  ].filter(Boolean);
+};
+
 module.exports = {
   //入口
   entry: "./src/main.js", //相对路径
@@ -24,77 +44,20 @@ module.exports = {
       // loader配置
       {
         test: /\.css$/, //test检测xx文件，检测.css结尾的文件
-        use: [
-          MiniCssExtractPlugin.loader, //将css提取单独文件
-          // style-loader将js 中 css 通过创建style标签添加html文件中生效
-          "css-loader", //将css资源编译common.js 的模块到js中
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                plugins: [
-                  "postcss-preset-env", // 能解决大多数样式兼容性问题
-                ],
-              },
-            },
-          },
-        ], //use执行顺序是从右向左（从下向上）
+        use: getStyleLoaders(), //use执行顺序是从右向左（从下向上）
       },
       {
         test: /\.less$/,
         // loader:MiniCssExtractPlugin.loader, //loader使用一个，use可以加载多个loader
-        use: [
-          // compiles Less to CSS
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                plugins: [
-                  "postcss-preset-env", // 能解决大多数样式兼容性问题
-                ],
-              },
-            },
-          },
-          'less-loader',//将less资源编译css文件
-        ],
+        use: getStyleLoaders('less-loader'),//将less资源编译css文件
       },
       {
         test: /\.s[ac]ss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                plugins: [
-                  "postcss-preset-env", // 能解决大多数样式兼容性问题
-                ],
-              },
-            },
-          },
-          'sass-loader',//将sass资源编译css文件
-        ],
+        use: getStyleLoaders('sass-loader'),//将sass资源编译css文件
       },
       {
         test: /\.styl$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                plugins: [
-                  "postcss-preset-env", // 能解决大多数样式兼容性问题
-                ],
-              },
-            },
-          },
-          'stylus-loader',//将stylus资源编译css文件
-        ],
+        use: getStyleLoaders('stylus-loader'),//将stylus资源编译css文件
       },
       {
         test: /\.(png|jpe?g|gif|webp|svg)$/,
