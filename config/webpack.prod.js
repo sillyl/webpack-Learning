@@ -44,52 +44,56 @@ module.exports = {
     rules: [
       // loader配置
       {
-        test: /\.css$/, //test检测xx文件，检测.css结尾的文件
-        use: getStyleLoaders(), //use执行顺序是从右向左（从下向上）
-      },
-      {
-        test: /\.less$/,
-        // loader:MiniCssExtractPlugin.loader, //loader使用一个，use可以加载多个loader
-        use: getStyleLoaders('less-loader'),//将less资源编译css文件
-      },
-      {
-        test: /\.s[ac]ss$/,
-        use: getStyleLoaders('sass-loader'),//将sass资源编译css文件
-      },
-      {
-        test: /\.styl$/,
-        use: getStyleLoaders('stylus-loader'),//将stylus资源编译css文件
-      },
-      {
-        test: /\.(png|jpe?g|gif|webp|svg)$/,
-        type: "asset",//相当于webpack4的url-loader, 会将原文件转base64输出
-        parser: {
-          dataUrlCondition: {
-            maxSize: 10 * 1024 // 小于10kb的图片会被base64处理,优点：减少请求数量，缺点：体积会变大一些
+        oneOf: [
+          {
+            test: /\.css$/, //test检测xx文件，检测.css结尾的文件
+            use: getStyleLoaders(), //use执行顺序是从右向左（从下向上）
+          },
+          {
+            test: /\.less$/,
+            // loader:MiniCssExtractPlugin.loader, //loader使用一个，use可以加载多个loader
+            use: getStyleLoaders('less-loader'),//将less资源编译css文件
+          },
+          {
+            test: /\.s[ac]ss$/,
+            use: getStyleLoaders('sass-loader'),//将sass资源编译css文件
+          },
+          {
+            test: /\.styl$/,
+            use: getStyleLoaders('stylus-loader'),//将stylus资源编译css文件
+          },
+          {
+            test: /\.(png|jpe?g|gif|webp|svg)$/,
+            type: "asset",//相当于webpack4的url-loader, 会将原文件转base64输出
+            parser: {
+              dataUrlCondition: {
+                maxSize: 10 * 1024 // 小于10kb的图片会被base64处理,优点：减少请求数量，缺点：体积会变大一些
+              }
+            },
+            generator: { //输出图片文件路径 名称； ext文件扩展名（png/jpg等，query携带其他参数比如写background-url（‘xxx?query’）
+              //[hash:10] hash值去前10位（防止图片文件名过长）
+              filename: 'static/images/[hash:10][ext][query]'
+            }
+          },
+          { //woff|woff2|ttf|eot|svg 其他文件配置
+            test: /\.(ttf|woff2?｜mp3|mp4|avi)$/,
+            type: "asset/resource",//相当于webpack4的file-loader 只会对原文件进行输出，不会对原文件转base64
+            generator: { //输出图标（icon）文件路径
+              //[hash:10] hash值去前10位（防止图片文件名过长）
+              filename: 'static/media/[hash:10][ext][query]'
+            }
+          },
+          {
+            test: /\.(js|mjs|jsx|ts|tsx)$/,
+            exclude: /(node_modules|bower_components)/, // 排除文件
+            use: {
+              loader: 'babel-loader',
+              options: { // options里的内容可以在外层新建个文件 babel.config.js文件 使用module.exports={presets: ['@babel/preset-env']}
+                presets: ['@babel/preset-env'] // 智能预设，能够编译ES6语法
+              }
+            }
           }
-        },
-        generator: { //输出图片文件路径 名称； ext文件扩展名（png/jpg等，query携带其他参数比如写background-url（‘xxx?query’）
-          //[hash:10] hash值去前10位（防止图片文件名过长）
-          filename: 'static/images/[hash:10][ext][query]'
-        }
-      },
-      { //woff|woff2|ttf|eot|svg 其他文件配置
-        test: /\.(ttf|woff2?｜mp3|mp4|avi)$/,
-        type: "asset/resource",//相当于webpack4的file-loader 只会对原文件进行输出，不会对原文件转base64
-        generator: { //输出图标（icon）文件路径
-          //[hash:10] hash值去前10位（防止图片文件名过长）
-          filename: 'static/media/[hash:10][ext][query]'
-        }
-      },
-      {
-        test: /\.(js|mjs|jsx|ts|tsx)$/,
-        exclude: /(node_modules|bower_components)/, // 排除文件
-        use: {
-          loader: 'babel-loader',
-          options: { // options里的内容可以在外层新建个文件 babel.config.js文件 使用module.exports={presets: ['@babel/preset-env']}
-            presets: ['@babel/preset-env'] // 智能预设，能够编译ES6语法
-          }
-        }
+        ]
       }
     ]
   },
