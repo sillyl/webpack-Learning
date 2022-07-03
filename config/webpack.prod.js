@@ -115,5 +115,6 @@ module.exports = {
   //生产环境不需要devServer
 
   //模式
-  mode: "production"
+  mode: "production",
+  devtool: "source-map",
 }
