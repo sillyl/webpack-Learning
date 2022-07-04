@@ -104,6 +104,7 @@ module.exports = {
                   presets: ['@babel/preset-env'], // 智能预设，能够编译ES6语法
                   cacheDirectory: true, // 开启cache缓存
                   cacheCompression: false, // 关闭缓存文件压缩
+                  plugins: ["@babel/plugin-transform-runtime"], // 减少代码体积
                 }
               }
             ]
