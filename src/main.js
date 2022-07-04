@@ -2,12 +2,14 @@
 import './css/iconfont.css';
 import './css/index.css';
 import count from './js/count';
+import { mul } from "./js/math";
 import sum from "./js/sum";
 import './less/index.less';
 import './sass/index.scss';
 import './sass/index1.scss';
 import './stylus/index.styl';
 
+console.log(mul(3, 4));
 console.log(count(2, 2));
 console.log(sum(1, 2, 3, 4, 5, 6));
 
